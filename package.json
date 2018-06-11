@@ -1,0 +1,20 @@
+{
+    "name": "athena",
+    "version": "0.0.1",
+    "description": "Athena System",
+    "scripts": {
+        "start": "node index.js",
+        "test": "mocha --recursive"
+    },
+    "dependencies": {
+        "chai": "^4.1.2",
+        "chai-http": "^4.0.0",
+        "eslint": "^4.19.1",
+        "eslint-config-standard": "^11.0.0",
+        "eslint-plugin-import": "^2.12.0",
+        "express": "^4.16.3",
+        "mocha": "^5.2.0",
+        "morgan": "^1.9.0",
+        "request": "^2.87.0"
+    }
+}
