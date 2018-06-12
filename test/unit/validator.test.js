@@ -26,16 +26,27 @@ describe('Unit Test | validator', () => {
                         return 'application/json';
                     },
                     body: {
-                        request: {
-                            method: 'adsfa',
-                            headers: {'c':'d'},
-                            body: {'f':'g'}
-                        },
-                        response: {
-                            delay: 20000,
-                            headers: {'a':'c'},
-                            status: 200,
-                            body:{d:'c'}
+                        config: {
+                            name: 'test',
+                            request: {
+                                method: 'adsfa',
+                                headers: {
+                                    'c': 'd'
+                                },
+                                body: {
+                                    'f': 'g'
+                                }
+                            },
+                            response: {
+                                delay: 20000,
+                                headers: {
+                                    'a': 'c'
+                                },
+                                status: 200,
+                                body: {
+                                    d: 'c'
+                                }
+                            }
                         }
                     }
                 };
@@ -43,6 +54,42 @@ describe('Unit Test | validator', () => {
             let bounded = validator.validate.bind(validator, req());
             expect(bounded).to.throw(SimulatorError).which.has.property('code', constants.HTTP_STATUS_BAD_REQUST);
             expect(bounded).to.throw(SimulatorError).which.has.property('message', 'Incorrect payload format. See /_sample');
+            done();
+        });
+        it('should not throw when given a valid request', done => {
+            const req = () => {
+                return {
+                    get: x => {
+                        return 'application/json';
+                    },
+                    body: {
+                        config: {
+                            name: 'test',
+                            request: {
+                                path: '/',
+                                method: 'adsfa',
+                                headers: {
+                                    'c': 'd'
+                                },
+                                body: {
+                                    'f': 'g'
+                                }
+                            },
+                            response: {
+                                delay: 20000,
+                                headers: {
+                                    'a': 'c'
+                                },
+                                status: 200,
+                                body: {
+                                    d: 'c'
+                                }
+                            }
+                        }
+                    }
+                };
+            };
+            validator.validate(req());
             done();
         });
     });

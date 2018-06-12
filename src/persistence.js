@@ -7,7 +7,7 @@ MongoConnection = (() => {
     let connected = false;
 
     return {
-        connect: string => {
+        connect: (string, app) => {
             if (connected) {
                 return connection;
             }
@@ -22,10 +22,9 @@ MongoConnection = (() => {
             }).then(connection => {
                 this.connection = connection;
                 logger.info('Connected to: ' + string);
-                return connection;
+                app.emit('connected');
             }).catch(error => {
                 logger.error('Cannot connect to: ' + string);
-                return null;
             });
         }
     };

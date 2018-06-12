@@ -22,16 +22,17 @@ module.exports = {
         }
         let body = req.body;
         let conditions = [
-            path2bool(['request'], body),
-            path2bool(['request', 'path'], body),
-            path2bool(['request', 'method'], body),
-            path2bool(['request', 'headers'], body),
-            path2bool(['request', 'body'], body),
-            path2bool(['response'], body),
-            path2bool(['response', 'status'], body),
-            path2bool(['response', 'headers'], body),
-            path2bool(['response', 'body'], body),
-            path2bool(['response', 'delay'], body),
+            path2bool(['config','name'], body),
+            path2bool(['config','request'], body),
+            path2bool(['config','request', 'path'], body),
+            path2bool(['config','request', 'method'], body),
+            path2bool(['config','request', 'headers'], body),
+            path2bool(['config','request', 'body'], body),
+            path2bool(['config','response'], body),
+            path2bool(['config','response', 'status'], body),
+            path2bool(['config','response', 'headers'], body),
+            path2bool(['config','response', 'body'], body),
+            path2bool(['config','response', 'delay'], body),
         ];
         if (R.contains(false,conditions)) {
             throw new SimulatorError(constants.HTTP_STATUS_BAD_REQUST, 'Incorrect payload format. See /_sample');
